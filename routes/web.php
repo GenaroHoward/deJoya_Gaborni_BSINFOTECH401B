@@ -1,7 +1,5 @@
 <?php
-
+use App\Http\Controllers\StoreController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('dashboard');
-});
+Route::get('/',[StoreController::class, 'index'])->name('stores.dashboard');
