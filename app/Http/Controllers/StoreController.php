@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Stores;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage;
 
 
 class StoreController extends Controller
@@ -58,7 +58,7 @@ class StoreController extends Controller
         'product_price' => $validated['product_price'],
         'product_quantity' => $validated['product_quantity'],
         'product_description' => $validated['product_description'],
-        'product_image' => $imagePath, // Save the image path
+        'product_image' => $imagePath,
     ]);
 
     return redirect()->route('stores.dashboard')->with('success', 'Product added successfully!');
@@ -68,10 +68,10 @@ class StoreController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function view(string $id)
     {
         $stores = Stores::findorfail(($id));
-        return view('stores.show',compact('stores'));
+        return view('stores.view',compact('stores'));
     }
 
     /**
@@ -79,22 +79,54 @@ class StoreController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $stores = Stores::findorfail(($id));
+        return view('stores.edit',compact('stores'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        // Validate the incoming data, including the image
+        $validated = $request->validate([
+            'product_name' => 'required|string|max:255',
+            'product_price' => 'required|numeric',
+            'product_quantity' => 'required|integer',
+            'product_description' => 'required|string|max:1000',
+            'product_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        // Fetch the store by ID
+        $store = Stores::findOrFail($id);
+
+        // Handle the image upload
+        if ($request->hasFile('product_image')) {
+            // Delete the old image if it exists
+            if ($store->product_image && Storage::exists('public/images/' . $store->product_image)) {
+                Storage::delete('public/images/' . $store->product_image);
+            }
+
+            // Store the new image
+            $imagePath = $request->file('product_image')->store('images', 'public');
+            $validated['product_image'] = $imagePath;
+        }
+
+        // Update the store's attributes
+        $store->update($validated);
+
+        // Redirect to a success page or back to the view page
+        return redirect()->route('stores.dashboard', $id)->with('success', 'Product updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        //
-    }
+    public function destroy($id)
+{
+    $store = Stores::findOrFail($id);
+    $store->delete();
+
+    return redirect()->route('stores.dashboard')->with('success', 'Product deleted successfully!');
+}
 }

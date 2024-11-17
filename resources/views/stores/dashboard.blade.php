@@ -45,7 +45,7 @@
             @foreach($stores as $store)
                 <div class="col">
                     <div class="card">
-                        <!-- Display image -->
+                        <!-- Display image need ata set size kaso di ko lam pano -->
                         <img src="{{ asset('storage/' . $store->product_image) }}" class="card-img-top" alt="Product Image">
 
                         <div class="card-body">
@@ -56,15 +56,29 @@
 
                             <div class="d-flex justify-content-center">
                                 <div>
-                                    <a href="#" class="btn btn-primary">View Details</a></div>
-                                <div>
-                                    <a href="#" class="btn btn-warning">Edit</a>
+                                    <a href="{{ route('stores.view', $store->id) }}" class="btn btn-primary">View</a>
                                 </div>
-                                <form action="#" method="POST" style="display:inline;">
+                                <div>
+                                    <a href="{{ route('stores.edit', $store->id) }}" class="btn btn-warning">Edit</a>
+                                </div>
+                                <form action="{{ route('stores.destroy', $store->id) }}" method="POST" id="deleteForm-{{ $store->id }}" style="display: inline;">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                    <button type="button" class="btn btn-danger" onclick="confirmDelete({{ $store->id }})">Delete</button>
                                 </form>
+
+                                <script>
+                                    function confirmDelete(storeId) {
+                                        if (confirm("Are you sure you want to delete this item?")) {
+                                            // If user clicks 'OK', submit the form
+                                            document.getElementById('deleteForm-' + storeId).submit();
+                                        } else {
+                                            event.preventDefault();
+                                            return false;
+                                        }
+                                    }
+                                </script>
+
                             </div>
                         </div>
                     </div>
