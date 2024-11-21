@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Funnel+Display:wght@300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+a {
+    color: #102542;
+    text-decoration: none;
+}
+
+.card:hover {
+    border: 2px solid #00A6FB;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+    transition: all 0.3s ease-in-out;
+}
+
+.card-img-top {
+    min-height: 200px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-body {
+    flex: 1;
+}
+
+.home-theme {
+    background-color:#FFEECF;
+    color:#102542;
+}
+
+.custom-divider {
+    border: 2px solid #102542;
+    opacity: 1;
+}
+
+.bordered-item {
+    border-style:solid;
+    border-color:grey;
+    border-width:1px;
+    border-radius:10px;
+}
+
+.img-preview{
+    margin:10px;
+    border-color:lightgrey;
+    border-style:solid;
+    border-width:.5px;
+    width:435px;
+    height:auto;
+}
+
+.dm-sans {
+    font-family: "DM Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.playfair-display {
+    font-family: "Playfair Display", serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.funnel-display {
+    font-family: "Funnel Display", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.papaya-whip {
+    background-color:#FFEECF;
+    color:#FFEECF;
+}
+
+.sunset {
+    background-color:#F3C677;
+    color:#F3C677;
+}
+
+.bittersweet {
+    color:#F87060;
+}
+
+.picton-blue {
+    color:#00A6FB;
+}
+
+.oxford-blue-text {
+    color:#102542;
+}
+
+.oxford-blue {
+    background-color:#102542;
+    color:#102542;
+}
