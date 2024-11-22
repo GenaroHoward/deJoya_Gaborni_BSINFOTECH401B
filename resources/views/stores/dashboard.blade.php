@@ -48,7 +48,7 @@
             @if($stores->isEmpty())
                 <p class="text-center fs-4">No Products Currently Listed!</p>
             @else
-            <div class="row row-cols-xxl-6">
+            <div class="row row-cols-sm-2 row-cols-md-4 row-cols-xxl-6">
             @foreach($stores as $store)
                 <div class="col my-2">
                     <a href="{{ route('stores.view', $store->id) }}">
