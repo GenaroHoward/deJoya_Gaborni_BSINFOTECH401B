@@ -78,7 +78,7 @@
     <div style="background-color:#ffffff; margin-top:100px; position:relative; bottom:0; width:100%;">
         <hr class="custom-divider">
         <div class="p-5">
-            <div class="row row-cols-xxl-2">
+            <div class="row row-cols-sm-1 row-cols-md-1 row-cols-xxl-2">
                 <div class="col-md-6 mb-3">
                     <h3 class="funnel-display">
                         What You Can Do While At The Dashboard...
